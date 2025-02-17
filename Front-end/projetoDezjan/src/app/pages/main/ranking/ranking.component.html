@@ -1,0 +1,25 @@
+<div class="container-estatisticas">
+    <section class="secao coluna-imagem">
+      <h2 class="titulo-secao">Mais Jogados</h2>
+      <div class="row">
+        <div
+          class="card card-jogo col-md-3 col-sm-6 col-centered jogos-all"
+          *ngFor="let jogo of jogos"
+        >
+          <a [href]="jogo.link" [attr.disabled]="jogo.disabled ? true : null">
+            <img
+              class="card-img-top img-fluid"
+              [src]="jogo.imagem"
+              [alt]="jogo.nome"
+            />
+          </a>
+          <div class="card-block">
+            <p class="card-text text-left">
+              <small class="text-muted">{{ jogo.campeonatos }} campeonatos</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

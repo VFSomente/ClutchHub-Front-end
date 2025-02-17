@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "Front-end/projetoDezjan/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/projetoDezJan"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/Front-end/projetoDezjan/dist/projetoDezjan/$1"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Audiowide&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=MedievalSharp&family=Orbitron:wght@400..900&family=Roboto+Mono:ital@0;1&family=Tiny5&display=swap');
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', cursive;
+}

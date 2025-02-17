@@ -1,0 +1,216 @@
+/* ====== HEADER PRINCIPAL ====== */
+header {
+    width: 100%;
+    height: 110px;
+    background: linear-gradient(90deg, rgb(153, 22, 204) 0%, rgba(22,198,230,1) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.logout-button {
+    background-color: rgb(25, 220, 255);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: transform 0.2s;
+}
+
+.logout-button:hover {
+    background-color: rgb(0, 217, 255);
+    transform: scale(1.05);
+}
+
+/* ====== LOGO ====== */
+header nav img.logo {
+    height: 100px;
+    max-width: 120px;
+    object-fit: contain;
+    margin-left: 20px;
+}
+
+h1.logotext { 
+    display: none;
+}
+
+/* ====== MENU NORMAL (DESKTOP) ====== */
+header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+header nav ul li:hover {
+    transform: scale(1.1);
+}
+
+/* ====== BOTÃO MENU (MOBILE) ====== */
+header nav .menu-toggle {
+    display: none;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+/* ====== RESPONSIVIDADE ====== */
+@media (max-width: 1024px) {
+    header {
+        padding: 0 15px;
+    }
+
+    h1.logotext {
+        font-size: 20px;
+        margin-left: 15px;
+    }
+
+    header nav img.logo {
+        max-width: 100px;
+        height: auto;
+    }
+
+    header nav ul {
+        gap: 15px;
+    }
+
+    header nav ul li a {
+        font-size: 16px;
+    }
+}
+
+/* ====== MOBILE (TELAS PEQUENAS) ====== */
+@media (max-width: 768px) {
+
+    header {
+        height: 80px;
+        padding: 0 10px;
+    }
+
+    h1.logotext {
+        display: none;
+    }
+
+    header nav img.logo {
+        max-width: 90px;
+    }
+
+    /* Estiliza botão menu hamburguer */
+    header nav .menu-toggle {
+        display: block;
+        font-size: 28px;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* Oculta o menu e exibe apenas quando ativo */
+    header nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 15px 0;
+        text-align: center;
+        gap: 15px;
+    }
+
+    header nav ul.active {
+        display: flex;
+    }
+
+    header nav ul li {
+        width: 100%;
+    }
+
+    header nav ul li a {
+        font-size: 18px;
+        padding: 12px;
+        display: block;
+    }
+}
+
+/* ====== TELAS MENORES QUE 480PX ====== */
+@media (max-width: 480px) {
+    header {
+        height: 70px;
+    }
+
+    h1.logotext {
+        display: none;
+    }
+
+    header nav img.logo {
+        max-width: 75px;
+    }
+
+    header nav .menu-toggle {
+        font-size: 24px;
+    }
+
+    header nav ul {
+        top: 70px;
+    }
+
+    header nav ul li a {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
+
+/* ====== Espaçamento para evitar sobreposição do header fixo ====== */
+.menuSpacing {
+    height: 110px;
+}
+
+@media (max-width: 768px) {
+    .menuSpacing {
+        height: 80px;
+    }
+
+    h1.logotext {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .menuSpacing {
+        height: 70px;
+    }
+
+    h1.logotext {
+        display: none;
+    }
+}

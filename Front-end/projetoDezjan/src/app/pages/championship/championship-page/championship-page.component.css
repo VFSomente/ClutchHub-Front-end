@@ -1,0 +1,184 @@
+/* championship-page.component.css */
+.campeonatos-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Exibição de perfil */
+.perfil-info {
+  background-color: #f4f4f4;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.perfil-info h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.perfil-info p {
+  margin: 5px 0;
+  font-size: 1em;
+}
+
+/* Formulário de criação/edição de torneio */
+.tournament-creation {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tournament-creation h2 {
+  margin-bottom: 20px;
+  font-size: 1.4em;
+}
+
+.tournament-creation label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.tournament-creation input,
+.tournament-creation select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.jogo-container,
+.times-container {
+  margin-bottom: 20px;
+}
+
+.jogo-container label,
+.times-container h2 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.lista-times {
+  margin-bottom: 15px;
+}
+
+.time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.time button {
+  background-color: #ff4444;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.time button:hover {
+  background-color: #cc3737;
+}
+
+.novo-time {
+  margin-top: 10px;
+}
+
+.novo-time input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.novo-time button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.novo-time button:hover {
+  background-color: #555;
+}
+
+/* Ações do formulário */
+.form-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.form-actions button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.form-actions button:hover {
+  background-color: #555;
+}
+
+/* Mensagem de erro */
+.mensagem-erro {
+  background-color: #fdd;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.mensagem-erro p {
+  margin: 0;
+  font-size: 1.1em;
+  color: #d9534f;
+}
+
+.mensagem-erro button {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.mensagem-erro button:hover {
+  background-color: #c9302c;
+}
+
+/* Botão de voltar ao lobby */
+.voltar-lobby {
+  margin-top: 20px;
+}
+
+.voltar-lobby button {
+  padding: 10px 20px;
+  background-color: #666;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.voltar-lobby button:hover {
+  background-color: #888;
+}

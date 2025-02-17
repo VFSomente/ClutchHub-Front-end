@@ -1,0 +1,66 @@
+<div class="campeonatos-container">
+  <!-- Exibição do perfil no topo -->
+  <div class="perfil-info" *ngIf="usuarioLogado">
+    <h3>Bem-vindo, {{ usuarioLogado.nickname }}!</h3>
+    <p>Email: {{ usuarioLogado.email }}</p>
+  </div>
+
+  <div class="tournament-creation" *ngIf="usuarioLogado">
+    <h2 *ngIf="!modoEdicao">Criar Torneio</h2>
+    <h2 *ngIf="modoEdicao">Editar Torneio</h2>
+    <form (ngSubmit)="modoEdicao ? salvarEdicao() : criarTorneio()">
+      <label for="nomeTorneio">Nome do Torneio:</label>
+      <input id="nomeTorneio" [(ngModel)]="nomeTorneio" name="nomeTorneio" required>
+
+      <label for="tipoTorneio">Tipo de Torneio:</label>
+      <select id="tipoTorneio" [(ngModel)]="tipoTorneio" name="tipoTorneio">
+        <option value="eliminacao-simples">Eliminação Simples</option>
+        <option value="eliminacao-dupla">Eliminação Dupla</option>
+      </select>
+
+      <!-- Seleção de Jogo -->
+      <div class="jogo-container">
+        <label for="jogoSelecionado">Selecione o Jogo:</label>
+        <select id="jogoSelecionado" [(ngModel)]="jogoSelecionado" name="jogoSelecionado" required>
+          <option *ngFor="let jogo of jogos" [ngValue]="jogo">{{ jogo.nome }}</option>
+        </select>
+      </div>
+
+      <!-- Cadastro de Times -->
+      <div class="times-container">
+        <h2>Adicionar Times</h2>
+        <div class="lista-times">
+          <div *ngFor="let time of times; let i = index" class="time">
+            <span>{{ time.nome }} ({{ time.sigla }})</span>
+            <button type="button" (click)="removerTime(i)">Remover</button>
+          </div>
+        </div>
+        <div class="novo-time">
+          <label for="nomeTime">Nome do Time:</label>
+          <input id="nomeTime" [(ngModel)]="novoTime.nome" name="nomeTime" placeholder="Digite o nome do time">
+          
+          <label for="siglaTime">Sigla do Time:</label>
+          <input id="siglaTime" [(ngModel)]="novoTime.sigla" name="siglaTime" placeholder="Digite a sigla do time" maxlength="3">
+          
+          <button type="button" (click)="adicionarTime()">Adicionar Time</button>
+        </div>
+      </div>
+
+      <!-- Botão de Criar/Editar Torneio -->
+      <div class="form-actions">
+        <button type="submit">{{ modoEdicao ? 'Salvar' : 'Criar Torneio' }}</button>
+        <button type="button" *ngIf="modoEdicao" (click)="cancelarEdicao()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Mensagem caso o usuário não esteja logado -->
+  <div *ngIf="!usuarioLogado" class="mensagem-erro">
+    <p>Você precisa estar logado para criar um torneio.</p>
+    <button (click)="irParaLogin()">Entrar</button>
+  </div>
+
+  <div class="voltar-lobby">
+    <button type="button" (click)="voltarAoLobby()">Voltar ao Lobby</button>
+  </div>
+</div>

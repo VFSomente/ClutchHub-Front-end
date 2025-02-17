@@ -1,0 +1,22 @@
+<header>
+    <nav>
+        <img class="logo" src="../../../../assets/images/menu2.png" alt="">
+        <h1 class="logotext">ClutchHub</h1>
+
+        <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+        <ul [ngClass]="{'active': menuOpen}">
+            <li><a (click)="navigateToCampeonatos()"><i class="fas fa-trophy"></i> Campeonatos</a></li>
+
+            <li *ngIf="nickname; else loginLink">
+                <i class="fas fa-user"></i> {{ nickname }}
+                <button (click)="logout()" class="logout-button">Sair</button>
+            </li>
+
+            <ng-template #loginLink>
+                <li class="perfil"><a class="perfil" (click)="navigateToCadastro()"><i class="fas fa-sign-in-alt"></i> Entrar</a></li>
+            </ng-template>
+        </ul>
+    </nav>
+</header>
+
+<div class="menuSpacing"></div>
