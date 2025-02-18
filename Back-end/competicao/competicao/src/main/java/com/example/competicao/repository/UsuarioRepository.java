@@ -13,9 +13,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     List<Usuario> findByNickname(String nickname);
 
 //    Optional<Usuario> findByEmail(@Param("email") String email);
-      Optional<Usuario> findByEmail(String email);
 
-//    Usuario findByEmail(String email);
+//      Optional<Usuario> findByEmail(String email);
+
+    Usuario findByEmail(String email);
 
     @Modifying
     @Transactional

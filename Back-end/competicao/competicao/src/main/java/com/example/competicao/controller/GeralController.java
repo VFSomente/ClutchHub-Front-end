@@ -4,6 +4,7 @@ import com.example.competicao.model.Times;
 import com.example.competicao.model.Usuario;
 import com.example.competicao.repository.TimesRepository;
 import com.example.competicao.repository.UsuarioRepository;
+import com.example.competicao.service.UsuarioService;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,9 @@ public class GeralController {
 
   private final TimesRepository timesRepository;
   private final UsuarioRepository usuarioRepository;
+
+  @Autowired
+  private  UsuarioService usuarioService;
 
   @Autowired
   public GeralController(
@@ -72,7 +76,7 @@ public class GeralController {
   @PutMapping("usuario/{id}")
   public void atualizarUsuario(@PathVariable("id") Long id, @RequestBody Usuario usuario) {
 
-   
+
     usuarioRepository.save(usuario);
   }
 
@@ -88,10 +92,9 @@ public class GeralController {
   }
 
   @GetMapping("/usuario/email/{email}")
-  public ResponseEntity<Usuario> buscarUsuarioPorEmail(@RequestParam String email) {
-    return usuarioRepository.findByEmail(email)
-      .map(ResponseEntity::ok)
-      .orElseGet(() -> ResponseEntity.notFound().build());
+  public ResponseEntity<Usuario> buscarUsuarioPorEmail(@PathVariable String email) {
+    return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
   }
+
 }
 
