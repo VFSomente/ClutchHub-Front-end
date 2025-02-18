@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 public class Times {
     @Id
     @Column
-    private String id;
+    private Long id;
 
     @Column
     private String nomeSigla;
@@ -27,63 +27,5 @@ public class Times {
     @Column
     private String jogadores;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNomeSigla() {
-        return nomeSigla;
-    }
-
-    public void setNomeSigla(String nomeSigla) {
-        this.nomeSigla = nomeSigla;
-    }
-
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    public int getDataCriacao() {
-        return dataCriacao;
-    }
-
-    public void setDataCriacao(int dataCriacao) {
-        this.dataCriacao = dataCriacao;
-    }
-
-    public String getOrganização() {
-        return organização;
-    }
-
-    public void setOrganização(String organização) {
-        this.organização = organização;
-    }
-
-    public String getJogadores() {
-        return jogadores;
-    }
-
-    public void setJogadores(String jogadores) {
-        this.jogadores = jogadores;
-    }
-
-    @Override
-    public String toString() {
-        return "Time{" +
-                "id=" + id +
-                ", nomeSigla='" + nomeSigla + '\'' +
-                ", pais='" + pais + '\'' +
-                ", dataCriacao=" + dataCriacao +
-                ", organização='" + organização + '\'' +
-                ", jogadores='" + jogadores + '\'' +
-                '}';
-    }
 }

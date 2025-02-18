@@ -6,6 +6,7 @@ import com.example.competicao.repository.TimesRepository;
 import com.example.competicao.repository.UsuarioRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,16 +28,11 @@ public class GeralController {
     this.usuarioRepository = usuarioRepository;
   }
 
-  private String gerarIdNumerico() {
-    Random random = new Random();
-    long numero = 1000000000L + (long) (random.nextDouble() * 9000000000L);
-    return String.valueOf(numero);
-  }
+
 
   @PostMapping("/times")
   public Times salvarTimes(@RequestBody Times times) {
     System.out.println("Time salvo: " + times);
-    times.setId(gerarIdNumerico());
     timesRepository.save(times);
 
     return times;
@@ -45,7 +41,7 @@ public class GeralController {
   @PostMapping("/usuario")
   public Usuario salvarUsuario(@RequestBody Usuario usuario) {
     System.out.println("Usuário salvo: " + usuario);
-    usuario.setId(gerarIdNumerico());
+
 
     usuarioRepository.save(usuario);
 
@@ -53,13 +49,13 @@ public class GeralController {
   }
 
   @GetMapping("/times/{id}")
-  public Times obterPorIdTimes(@PathVariable("id") String id) {
+  public Times obterPorIdTimes(@PathVariable("id") Long id) {
     return timesRepository.findById(id).orElse(null);
   }
 
 
   @GetMapping("/usuario/{id}")
-  public Usuario obterPorIdUsuario(@PathVariable("id") String id) {
+  public Usuario obterPorIdUsuario(@PathVariable("id") Long id) {
     return usuarioRepository.findById(id).orElse(null);
   }
 
@@ -69,15 +65,14 @@ public class GeralController {
   }
 
   @PutMapping("/times{id}")
-  public void atualizar(@PathVariable("id") String id, @RequestBody Times times) {
-    times.setId(id);
+  public void atualizar(@PathVariable("id") Long id, @RequestBody Times times) {
     timesRepository.save(times);
   }
 
   @PutMapping("usuario/{id}")
-  public void atualizarUsuario(@PathVariable("id") String id, @RequestBody Usuario usuario) {
+  public void atualizarUsuario(@PathVariable("id") Long id, @RequestBody Usuario usuario) {
 
-    usuario.setId(id);
+   
     usuarioRepository.save(usuario);
   }
 
@@ -92,21 +87,11 @@ public class GeralController {
     usuarioRepository.deleteByEmail(email);
   }
 
-  @GetMapping("/usuario/email")
-  public Usuario buscarUsuarioPorEmail(@RequestParam String email) {
-    System.out.println("Buscando usuário pelo email: " + email);
-
-    Optional<Usuario> usuarioOpt = usuarioRepository.findFirstByEmail(email);
-
-    if (usuarioOpt.isPresent()) {
-      Usuario usuario = usuarioOpt.get();
-      System.out.println("Usuário encontrado: " + usuario);
-      return usuario;
-    } else {
-      System.out.println("Nenhum usuário encontrado para o email: " + email.trim());
-      return null;
-    }
-
+  @GetMapping("/usuario/email/{email}")
+  public ResponseEntity<Usuario> buscarUsuarioPorEmail(@RequestParam String email) {
+    return usuarioRepository.findByEmail(email)
+      .map(ResponseEntity::ok)
+      .orElseGet(() -> ResponseEntity.notFound().build());
   }
 }
 
