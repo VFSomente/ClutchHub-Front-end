@@ -1,45 +1,63 @@
-<body>
-    <div class="container">
-        <h1>Entre na ClutchHub</h1>
-  
-    <!-- Formulário de Login primeiro -->
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
-        <div class="form-group">
-            <label for="emailLogin">E-mail:</label>
-            <input type="email" id="emailLogin" formControlName="email" required>
-        </div>
-  
-        <div class="form-group">
-            <label for="senhaLogin">Senha:</label>
-            <input type="password" id="senhaLogin" formControlName="senha" required>
-        </div>
-  
-        <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
-    </form>
-  
-    <h2>Ainda não tem conta?</h2>
-  
-    <!-- Formulário de Cadastro abaixo -->
-    <form [formGroup]="cadastroForm" (ngSubmit)="onSubmitCadastro()">
-        <div class="form-group">
-            <label for="nickname">Nickname:</label>
-            <input type="text" id="nickname" formControlName="nickname" required>
-        </div>
-  
-        <div class="form-group">
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" formControlName="email" required>
-        </div>
-  
-        <div class="form-group">
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" formControlName="senha" required>
-        </div>
-  
-        <button type="submit" [disabled]="cadastroForm.invalid">Cadastrar</button>
-        <button type="buttonInicio" (click)="voltarInicio()">Voltar ao Lobby</button>
-    </form>
-  </div>
+<!-- <div class="container active"> -->
+<div>
+    <img class="logo" src="../../../../assets/images/menu2.png" alt="Logo">
+</div>
+<div class="container" [ngClass]="{ 'active': containerClass === 'active' }">
+    <!-- Formulário de Cadastro -->
+    <div class="form-container sign-up" [ngClass]="{ 'active': containerClass === 'active' }">
+        <form [formGroup]="cadastroForm" (ngSubmit)="onSubmitCadastro()">
+            <h1 class="registertext">Crie sua conta</h1>
+            <span></span>
+            <div class="form-group">
+                <label for="nickname">Nome:</label>
+                <input type="text" id="nickname" formControlName="nickname" placeholder="Nome" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" formControlName="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" formControlName="senha" placeholder="Senha" required>
+            </div>
+            <button id="registerBtn" #registerBtn type="submit" [disabled]="cadastroForm.invalid">Registrar-se</button>
+            <button type="button" (click)="voltarInicio()">Voltar ao lobby</button>
+        </form>
+    </div>
 
+    <!-- Formulário de Login -->
+    <div class="form-container sign-in" [ngClass]="{ 'active': containerClass === 'inactive' }">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+            <h1>Entrar</h1>
+            <div class="form-group">
+                <label for="emailLogin">E-mail:</label>
+                <input type="email" id="emailLogin" formControlName="email" required>
+            </div>
+            <div class="form-group">
+                <label for="senhaLogin">Senha:</label>
+                <input type="password" id="senhaLogin" formControlName="senha" required>
+            </div>
+            <a href="#">Esqueceu sua senha?</a>
+            <button  id="login" #loginBtn type="submit" [disabled]="loginForm.invalid">Entrar</button>
+            <button type="button" (click)="voltarInicio()">Voltar ao lobby</button>
+        </form>
+    </div>
     
-</body>
+    <!-- Toggle de Formulários -->
+    <div class="toggle-container">
+        <div class="toggle">
+            <div class="toggle-panel toggle-left">
+                <h1>Bem-vindo de volta!</h1>
+                <p>Faça o login com sua conta!</p>
+                <button id="login" class="buttonlogin" (click)="toggleForm('inactive')">Entrar</button>
+            </div>
+            <div class="toggle-panel toggle-right">
+                <h1>Seja bem-vindo!</h1>
+                <p>Coloque seus dados pessoais para usar todas as funcionalidades!</p>
+                <button id="registerBtn" class="buttonregister" (click)="toggleForm('active')">Registre-se</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- </div> -->

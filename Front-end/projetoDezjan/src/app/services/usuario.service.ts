@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment'; // Certifique-se de ter essa configuração
 
 interface Usuario {
+  nickname?: string;
   email: string;
   senha: string;
-  nickname?: string;
   role?: string; // Adicionando para verificar permissões
 }
 

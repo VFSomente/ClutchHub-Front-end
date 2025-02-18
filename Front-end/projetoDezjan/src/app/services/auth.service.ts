@@ -12,29 +12,37 @@ export interface Usuario {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/competicao'; // URL do backend
+  private apiUrl = 'http://localhost:8080/geralcontroller'; // URL do backend
 
   constructor(private http: HttpClient) {}
 
   login(email: string, senha: string): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/login`, { email, senha });
+    return this.http.post<Usuario>(`${this.apiUrl}/usuario`, { email, senha });
   }
 
-  cadastrar(email: string, senha: string, nickname: string): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/register`, { email, senha, nickname });
+  cadastrar(nickname: string, email: string, senha: string): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.apiUrl}/usuario`, { nickname, email, senha });
   }
 
   salvarUsuarioLocal(usuario: Usuario): void {
     localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
   }
 
+
   getUsuarioLogado(): Usuario | null {
     const usuarioSalvo = localStorage.getItem('usuarioLogado');
     return usuarioSalvo ? JSON.parse(usuarioSalvo) : null;
+  }
+  getUserEmail(): string | null {
+    const usuario = localStorage.getItem('/email'); // Ou outra forma de armazenar
+    return usuario ? JSON.parse(usuario).email : null;
   }
 
   logout(): void {
     localStorage.removeItem('usuarioLogado');
     console.log('Usuário deslogado');
   }
+  
+  
+
 }

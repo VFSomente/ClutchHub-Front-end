@@ -1,22 +1,19 @@
 package com.example.competicao.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_Usuario")
 public class Usuario {
 
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column
     private String nickname;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario.service';
 import { AuthService } from '../../../services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-menu',
@@ -18,24 +19,36 @@ export class MenuComponent implements OnInit {
   isCadastroSuccess: boolean = false;
   isAdmin: boolean = false;
 
+  private apiUrl = 'http://localhost:8080/geralcontroller/usuario';
+
   constructor(
     private usuarioService: UsuarioService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
+  
+  
   ngOnInit() {
-    this.usuarioService.getUsuarioFromBackend().subscribe((usuario) => {
-      if (usuario) {
-        this.nickname = usuario.nickname ?? null; // Se undefined, define como null
-        this.isAdmin = (usuario.role ?? '') === 'admin'; // Evita erro de undefined
-      } else {
-        this.nickname = null;
-        this.isAdmin = false;
-      }
-    });
+    const userEmail = this.authService.getUserEmail();
+    console.log('Email obtido do AuthService:', userEmail);
+    
+    if (userEmail) {
+      this.http.get<any>(`${this.apiUrl}/email?email=${userEmail}`).subscribe({
+        next: (usuario) => {
+          console.log('Usuário retornado pela API:', usuario); // Depuração
+          this.nickname = usuario?.nickname ?? null;
+          this.isAdmin = usuario?.role === 'admin';
+        },
+        error: (err) => {
+          console.error('Erro ao buscar usuário:', err);
+          this.nickname = null;
+          this.isAdmin = false;
+        }
+      });
+    }
   }
-
   logout() {
     this.authService.logout();
     this.usuarioService.setUsuario(null);
