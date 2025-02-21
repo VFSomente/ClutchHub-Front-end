@@ -18,8 +18,9 @@ export class MenuComponent implements OnInit {
   isPopupVisible: boolean = false;
   isCadastroSuccess: boolean = false;
   isAdmin: boolean = false;
+  
 
-  private apiUrl = 'http://localhost:8080/geralcontroller/usuario';
+  private apiUrl = 'http://localhost:8080/usuario';
 
   constructor(
     private usuarioService: UsuarioService,
@@ -35,7 +36,7 @@ export class MenuComponent implements OnInit {
     console.log('Email obtido do AuthService:', userEmail);
     
     if (userEmail) {
-      this.http.get<any>(`${this.apiUrl}/email?email=${userEmail}`).subscribe({
+      this.http.get<any>(`${this.apiUrl}/email/${userEmail}`).subscribe({
         next: (usuario) => {
           console.log('Usuário retornado pela API:', usuario); // Depuração
           this.nickname = usuario?.nickname ?? null;
@@ -53,6 +54,7 @@ export class MenuComponent implements OnInit {
     this.authService.logout();
     this.usuarioService.setUsuario(null);
     this.router.navigate(['/']);
+    location.reload();
   }
 
   navigateToCadastro() {

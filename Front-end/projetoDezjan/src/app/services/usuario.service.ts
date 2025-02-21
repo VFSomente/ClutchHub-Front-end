@@ -17,7 +17,7 @@ export class UsuarioService {
   private usuarioSubject: BehaviorSubject<Usuario | null> = new BehaviorSubject<Usuario | null>(null);
   usuario$: Observable<Usuario | null> = this.usuarioSubject.asObservable();
   private apiUrl = environment.apiUrl; // Ajuste conforme necessário
-
+  
   constructor(private http: HttpClient) {
     const usuarioSalvo = localStorage.getItem('usuarioLogado');
     if (usuarioSalvo) {
@@ -25,6 +25,21 @@ export class UsuarioService {
     } else {
       this.carregarUsuario(); // Busca do backend se não houver no localStorage
     }
+  }
+  
+  carregarUsuario(): void {
+    // Se você estiver tentando carregar um usuário, o ideal seria usar um método GET no backend
+    // Como estamos usando POST aqui, vou passar um objeto vazio para o método.
+    // Isso pode ser alterado conforme o seu fluxo
+    const usuarioVazio: Usuario = { email: '', senha: '' }; // Ajuste conforme necessário
+    this.getUsuarioFromBackend(usuarioVazio).subscribe(
+      (usuario) => this.setUsuario(usuario),
+      () => this.setUsuario(null)
+    );
+  }
+  
+  getUsuarioFromBackend(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.apiUrl}/register`, usuario);  // Passando o objeto 'usuario'
   }
 
   setUsuario(usuario: Usuario | null): void {
@@ -41,15 +56,6 @@ export class UsuarioService {
   }
 
   /** Busca os dados do usuário autenticado no backend */
-  getUsuarioFromBackend(): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}/usuario`);
-  }
 
   /** Carrega o usuário do backend e atualiza o estado local */
-  carregarUsuario(): void {
-    this.getUsuarioFromBackend().subscribe(
-      (usuario) => this.setUsuario(usuario),
-      () => this.setUsuario(null) // Se houver erro, remove usuário
-    );
-  }
 }

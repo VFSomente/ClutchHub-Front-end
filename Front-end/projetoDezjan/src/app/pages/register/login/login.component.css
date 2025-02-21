@@ -262,3 +262,9 @@ div>button.buttonregister:hover {
     border: 2px solid #16c6e6;
     background-color: #fff;
   }
+.erro-mensagem {
+    color: #ff0000; /* Cor vermelha */
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+  }
